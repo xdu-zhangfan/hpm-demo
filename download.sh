@@ -5,5 +5,4 @@ openocd \
 -c "halt" \
 -c "flash write_image erase build/output/demo.elf" \
 -c "reset" \
--c "run" \
 -c "shutdown"

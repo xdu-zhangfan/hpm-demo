@@ -24,6 +24,7 @@
         "ff.h": "c",
         "err_print.h": "c",
         "init.h": "c",
-        "hpm_sdmmc_sd.h": "c"
+        "hpm_sdmmc_sd.h": "c",
+        "csv.h": "c"
     }
 }

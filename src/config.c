@@ -48,7 +48,7 @@ int config_init(void)
     }
 
     unsigned int br;
-    f_read(&config_file, &__config_sys_configs, sizeof(__config_sys_configs), &br);
+    fresult = f_read(&config_file, &__config_sys_configs, sizeof(__config_sys_configs), &br);
     if (br != sizeof(__config_sys_configs))
     {
         f_close(&config_file);
