@@ -1,0 +1,53 @@
+{
+  "socName": "HPM6360",
+  "packageName": "LQFP144",
+  "functions": {
+    "init_pins": {
+      "groupOptions": {},
+      "selectPins": {
+        "PZ06": {
+          "signal": "UART.UART6.TXD",
+          "nextIOC": {
+            "signal": "BATT.SOC_PZ[06]"
+          },
+          "padCtls": {
+            "SPD": {
+              "key": "11",
+              "index": "v0"
+            },
+            "PE": {
+              "key": "0",
+              "index": "v0"
+            },
+            "KE": {
+              "key": "0",
+              "index": "v0"
+            }
+          }
+        },
+        "PZ07": {
+          "signal": "UART.UART6.RXD",
+          "nextIOC": {
+            "signal": "BATT.SOC_PZ[07]"
+          },
+          "padCtls": {
+            "SPD": {
+              "key": "11",
+              "index": "v0"
+            },
+            "PE": {
+              "key": "0",
+              "index": "v0"
+            },
+            "KE": {
+              "key": "0",
+              "index": "v0"
+            }
+          }
+        }
+      },
+      "unlockedSignals": {}
+    }
+  },
+  "selectFunctionName": "init_pins"
+}

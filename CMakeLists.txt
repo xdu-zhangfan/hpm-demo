@@ -20,12 +20,15 @@ sdk_compile_definitions(-D__NDS32_EXT_PERF__)
 sdk_compile_definitions(-DINIT_EXT_RAM_FOR_DATA)
 
 sdk_inc(inc)
+sdk_inc(libs/dma)
 
 sdk_app_src(src/main.c)
 sdk_app_src(src/init.c)
 sdk_app_src(src/interrupts.c)
 sdk_app_src(src/err_print.c)
 sdk_app_src(src/config.c)
+
+sdk_app_src(libs/dma/dma.c)
 
 sdk_compile_options(-Ofast)
 
