@@ -64,6 +64,7 @@ extern char fatfs_log_file_name[];
 extern FIL config_file;
 
 extern unsigned char *hmi_buffer;
+extern int hmi_rx_flag;
 #endif
 
 #endif
