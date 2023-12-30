@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdint.h>
+#include "time.h"
 
 #include "board.h"
 #include "hpm_debug_console.h"
@@ -33,8 +34,6 @@
 
 #define LED_FLASH_PERIOD_IN_MS 500
 
-#define HMI_BUFFER_SIZE 4
-
 #define HMI_UART HPM_UART6
 #define HMI_UART_BASE HPM_UART6_BASE
 #define HMI_UART_IRQ IRQn_UART6
@@ -52,8 +51,6 @@
 #define HMI_UART_TX_DMAMUX_CHN DMA_SOC_CHN_TO_DMAMUX_CHN(HMI_UART_DMA_CONTROLLER, HMI_UART_TX_DMA_CHN)
 #define HMI_UART_TX_DMA_REQ HPM_DMA_SRC_UART6_TX
 
-#ifndef MAIN_C
-
 extern sd_card_t g_sd;
 extern SDRAM_DATATYPE *sdram;
 
@@ -63,8 +60,10 @@ extern BYTE fatfs_work_buffer[];
 extern char fatfs_log_file_name[];
 extern FIL config_file;
 
-extern unsigned char *hmi_buffer;
-extern int hmi_rx_flag;
-#endif
+extern volatile unsigned char *hmi_buffer;
+extern volatile int hmi_rx_flag;
+extern volatile int hmi_tx_flag;
+extern volatile int hmi_start_time;
+extern volatile int hmi_info_page_id;
 
 #endif

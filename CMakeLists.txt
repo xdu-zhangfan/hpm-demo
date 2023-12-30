@@ -21,6 +21,7 @@ sdk_compile_definitions(-DINIT_EXT_RAM_FOR_DATA)
 
 sdk_inc(inc)
 sdk_inc(libs/dma)
+sdk_inc(libs/hmi_drv)
 
 sdk_app_src(src/main.c)
 sdk_app_src(src/init.c)
@@ -29,6 +30,7 @@ sdk_app_src(src/err_print.c)
 sdk_app_src(src/config.c)
 
 sdk_app_src(libs/dma/dma.c)
+sdk_app_src(libs/hmi_drv/hmi_drv.c)
 
 sdk_compile_options(-Ofast)
 
