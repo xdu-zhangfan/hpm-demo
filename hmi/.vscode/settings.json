@@ -1,0 +1,30 @@
+{
+    "cmake.configureArgs": [
+        "-DBOARD=hpm6300evk"
+    ],
+    "cmake.defaultVariants": {
+        "buildType": {
+            "choices": {
+                "flash_xip": {
+                    "short": "flash_xip",
+                    "long": "flash_xip",
+                    "buildType": "flash_xip"
+                }
+            }
+        }
+    },
+    "files.associations": {
+        "main.h": "c",
+        "board.h": "c",
+        "hpm_math.h": "c",
+        "hpm_clock_drv.h": "c",
+        "hpm_csr_drv.h": "c",
+        "hpm_soc.h": "c",
+        "hpm_common.h": "c",
+        "ff.h": "c",
+        "err_print.h": "c",
+        "init.h": "c",
+        "hpm_sdmmc_sd.h": "c",
+        "csv.h": "c"
+    }
+}
