@@ -155,7 +155,7 @@ void init_adc(void)
     /* Trigger source initialization */
     pwm_cmp_config_t pwm_cmp_cfg;
     pwm_output_channel_t pwm_output_ch_cfg;
-    pwm_set_reload(BOARD_APP_ADC16_HW_TRIG_SRC, 0, clock_get_frequency(clock_ahb) / APP_ADC16_SAMPLE_RATE_KHZ - 1);
+    pwm_set_reload(BOARD_APP_ADC16_HW_TRIG_SRC, 0, clock_get_frequency(clock_ahb) / 1000 / APP_ADC16_SAMPLE_RATE_KHZ - 1);
     memset(&pwm_cmp_cfg, 0x00, sizeof(pwm_cmp_config_t));
     pwm_cmp_cfg.enable_ex_cmp = false;
     pwm_cmp_cfg.mode = pwm_cmp_mode_output_compare;
