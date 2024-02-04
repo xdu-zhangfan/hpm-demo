@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:HPM_SDK_BASE}/boards/hpm6300evk/**",
+                "${env:HPM_SDK_BASE}/components/**",
+                "${env:HPM_SDK_BASE}/drivers/**",
+                "${env:HPM_SDK_BASE}/middleware/**",
+                "${env:HPM_SDK_BASE}/soc/HPM6360/**",
+                "${env:HPM_SDK_BASE}/soc/ip/**",
+                "${env:HPM_SDK_BASE}/arch/**"
+            ],
+            "defines": [],
+            "compilerPath": "${env:GNURISCV_TOOLCHAIN_PATH}/bin/riscv32-elf-gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,7 +1,7 @@
 #ifndef INIT_H
 #define INIT_H
 
-#include "main.h"
+void init_gpio(void);
 
 void init_fatfs(void);
 void init_config(void);

@@ -26,8 +26,7 @@
         "init.h": "c",
         "hpm_sdmmc_sd.h": "c",
         "csv.h": "c",
-        "hpm_pwm_drv.h": "c",
-        "hpm_trgm_drv.h": "c",
-        "array": "c"
+        "hpm_gpiom_drv.h": "c",
+        "config.h": "c"
     }
 }

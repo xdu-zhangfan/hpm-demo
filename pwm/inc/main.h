@@ -14,6 +14,7 @@
 #include "hpm_pwm_drv.h"
 #include "hpm_trgm_drv.h"
 #include "hpm_trgmmux_src.h"
+#include "hpm_gpio_drv.h"
 #include "hpm_common.h"
 
 #include "hpm_math.h"
@@ -28,11 +29,14 @@
 #define FATFS_DRIVER_NUM_BUFFER_LENGTH 4
 #define FATFS_WORK_BUFFER_LENGTH FF_MAX_LFN
 
-#define LED_FLASH_PERIOD_IN_MS 100
+#define LED_FLASH_PERIOD_IN_MS 500
 
-#define APP_ADC16_SAMPLE_RATE_KHZ 1000
-#define APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES 4096
-#define APP_ADC16_CH_NUM 1
+#define MOTO_ENA_PINGROUP GPIO_OE_GPIOC
+#define MOTO_ENA_PINNUM 12
+#define MOTO_DIR_PINGROUP GPIO_OE_GPIOC
+#define MOTO_DIR_PINNUM 11
+#define MOTO_PUL_PINGROUP GPIO_OE_GPIOA
+#define MOTO_PUL_PINNUM 6
 
 extern sd_card_t g_sd;
 extern SDRAM_DATATYPE *sdram;
