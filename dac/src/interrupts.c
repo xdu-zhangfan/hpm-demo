@@ -2,7 +2,6 @@
 #include "time.h"
 #include "err_print.h"
 #include "misc.h"
-#include <riscv_dsp_math_types.h>
 
 extern uint32_t seq_buff[];
 extern uint8_t seq_adc_channel[];
@@ -11,7 +10,7 @@ void timer_callback_func(void)
 {
     board_led_toggle();
 
-    pwm_start_counter(BOARD_APP_ADC16_HW_TRIG_SRC);
+    MISC_RESET_BIT(BOARD_APP_ADC16_BASE->SEQ_DMA_CFG, 13);
 
     return;
 }
@@ -28,8 +27,8 @@ void isr_adc16(void)
     adc16_seq_dma_data_t *dma_data = (adc16_seq_dma_data_t *)seq_buff;
 
     misc_start_time();
-    float32_t *array = (float *)sdram;
-    float32_t sum_value = 0;
+    float *array = (float *)sdram;
+    float sum_value = 0;
     // Convert ADC value
     for (int i = 0; i < APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES; ++i)
     {
@@ -38,7 +37,7 @@ void isr_adc16(void)
     }
 
     // DC balance
-    float32_t average_value = sum_value / APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES;
+    float average_value = sum_value / APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES;
     for (int i = 0; i < APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES; ++i)
     {
         array[i] -= average_value;
@@ -47,7 +46,7 @@ void isr_adc16(void)
     // Add Hamming window
     for (int i = 0; i < APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES; ++i)
     {
-        float32_t win_v = 0.54 - 0.46 * hpm_dsp_cos_f32((2 * 3.1415926 * i) / (APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES - 1));
+        float win_v = 0.54 - 0.46 * hpm_dsp_cos_f32((2 * 3.1415926 * i) / (APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES - 1));
         array[i] *= win_v;
     }
     printf("Convert time: %d us\n", misc_get_end_time() / 200);
@@ -69,11 +68,35 @@ void isr_adc16(void)
         array[i] = (array[i] < 0) ? (0 - array[i]) : array[i];
     }
 
-    float32_t max_value = hpm_dsp_max_f32(array, APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES / 4, &max_index);
+    float max_value = hpm_dsp_max_f32(array, APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES / 4, &max_index);
 
-    printf("Max Frequency: %d, %f, %f KHz\n", max_index, max_value,
-           1.0 * max_index * APP_ADC16_SAMPLE_RATE_KHZ / APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES);
+    printf("Max Frequency: %d, %f, %f Hz\n", max_index, max_value,
+           1.0 * max_index * ADDA_SAMPLE_RATE / APP_ADC16_SEQ_DMA_BUFF_LEN_IN_4BYTES);
 
     return;
 }
 SDK_DECLARE_EXT_ISR_M(BOARD_APP_ADC16_IRQn, isr_adc16)
+
+void isr_dac(void)
+{
+    uint32_t status;
+
+    status = dac_get_status_flags(BOARD_DAC_BASE);
+    dac_set_status_flags(BOARD_DAC_BASE, status);
+    // dac_set_buffer_sw_trigger(BOARD_DAC_BASE);
+
+    // printf("DAC int: ");
+
+    if (DAC_IRQ_STS_BUF0_CMPT_GET(status))
+    {
+        // printf("buf0. ");
+    }
+    if (DAC_IRQ_STS_BUF1_CMPT_GET(status))
+    {
+        // printf("buf1. ");
+    }
+    // printf("\n");
+
+    return;
+}
+SDK_DECLARE_EXT_ISR_M(BOARD_DAC_IRQn, isr_dac)

@@ -1,0 +1,12 @@
+{
+  "socName": "HPM6360",
+  "packageName": "LQFP144",
+  "functions": {
+    "init_pins": {
+      "groupOptions": {},
+      "selectPins": {},
+      "unlockedSignals": {}
+    }
+  },
+  "selectFunctionName": "init_pins"
+}
